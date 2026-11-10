@@ -1,12 +1,12 @@
 <?php
-$conn = mysqli_connect("localhost", "root", "", "costume_closet");
+$conn = mysqli_connect("127.0.0.1", "root", "root", "costume_closet", 8889);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $item = $_POST["item"];
     $borrower = $_POST["borrower"];
     $due_date = $_POST["due_date"];
 
-    $stmt = $conn->prepare("INSERT INTO costume_closet (item, borrower, due_date) VALUES (?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO loans (item, borrower, due_date) VALUES (?, ?, ?)");
     $stmt->bind_param("sss", $item, $borrower, $due_date);
     $stmt->execute();
     $stmt->close();

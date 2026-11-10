@@ -1,0 +1,19 @@
+<?php
+// connect to the database
+$conn = mysqli_connect("127.0.0.1", "root", "root", "costume_closet", 8889);
+
+// get the loan ID 
+$id = isset($_GET["id"]) ? (int) $_GET["id"] : 0;
+
+// mark loan as returned
+if ($id > 0) {
+    $stmt = $conn->prepare("UPDATE loans SET returned = 1 WHERE id = ?");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $stmt->close();
+}
+
+// go back to the loan list
+header("Location: list.php");
+exit;
+?>

@@ -31,13 +31,16 @@ $result = $conn->query("SELECT id, item, borrower, due_date, returned FROM loans
         <?php while ($row = $result->fetch_assoc()) { ?>
         <tr>
             <td><?php echo $row["id"]; ?></td>
-            <td><?php echo ($row["item"]); ?></td>
-            <td><?php echo ($row["borrower"]); ?></td>
+            <td><?php echo htmlspecialchars($row["item"]); ?></td>
+            <td><?php echo htmlspecialchars($row["borrower"]); ?></td>
             <td><?php echo $row["due_date"]; ?></td>
             <td><?php echo $row["returned"] ? "Returned" : "Not Returned"; ?></td>
             <td>
                 <a href="mark_returned.php?id=<?php echo $row['id']; ?>">Mark returned</a>
-                <a href="delete.php?id=<?php echo $row['id']; ?>">Delete</a>
+                <form action="delete.php" method="POST">
+                    <input type="hidden" name="id" value="<?php echo (int) $row['id']; ?>">
+                    <button type="submit">Delete</button>
+                </form>
             </td>
         </tr>
         <?php } ?>

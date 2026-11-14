@@ -5,8 +5,8 @@ $conn = mysqli_connect("127.0.0.1", "root", "root", "costume_closet", 8889);
 // get the loan ID
 $id = 0;
 
-if (isset($_GET["id"])) {
-    $id = (int) $_GET["id"];
+if (isset($_POST["id"])) {
+    $id = (int) $_POST["id"];
 }
 
 // delete the loan
